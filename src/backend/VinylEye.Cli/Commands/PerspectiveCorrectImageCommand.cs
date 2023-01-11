@@ -34,13 +34,14 @@ public class PerspectiveCorrectImageCommand : Command
 
         using var queryImageColour = ImageHelper.LoadImage(queryImagePath, ImreadModes.Color);
         using var unWarpedImage=new Mat();
-        if(homographyMatrix!=null)
-            Cv2.WarpPerspective(queryImageColour, unWarpedImage,homographyMatrix, new Size(width, height));
-         
-        using var croppedAndUnWarpedImage = new Mat(unWarpedImage,new Rect(0,0,trainImage.Width, trainImage.Height));
+
+        if (homographyMatrix == null) return 0;
+
+        Cv2.WarpPerspective(queryImageColour, unWarpedImage,homographyMatrix, new Size(width, height));
+
+        using var croppedAndUnWarpedImage = new Mat(unWarpedImage, new Rect(0, 0, trainImage.Width, trainImage.Height));
 
         Cv2.ImWrite(Path.Combine(outputDirectory, "query_perspective_corrected.jpeg"), croppedAndUnWarpedImage);
-
         return 1;
     }
 }
