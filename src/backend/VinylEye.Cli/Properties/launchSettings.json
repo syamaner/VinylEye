@@ -2,7 +2,7 @@
   "profiles": {
     "VinylEye.Cli": {
       "commandName": "Project",
-      "commandLineArgs": "match --output-directory images"
+      "commandLineArgs": "perspective-correct --output-directory images"
     }
   }
 }

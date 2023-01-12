@@ -27,18 +27,18 @@ internal static class ImageHelper
         var sourcePoints = new List<Point2f>(matches.Count);
         var destinationPoints = new List<Point2f>(matches.Count);
  
-        foreach (var m in matches)
+        foreach (var match in matches)
         {
-            var sourceKeyPoint = sourceKeyPoints[m.QueryIdx];
-            var destinationKeyPoint = destinationKeyPoints[m.TrainIdx];
+            var sourceKeyPoint = sourceKeyPoints[match.QueryIdx];
+            var destinationKeyPoint = destinationKeyPoints[match.TrainIdx];
 
             sourcePoints.Add(new Point2f(sourceKeyPoint.Pt.X, sourceKeyPoint.Pt.Y));
             destinationPoints.Add(new Point2f(destinationKeyPoint.Pt.X, destinationKeyPoint.Pt.Y));
         }
-        var ptsA = InputArray.Create(sourcePoints);
-        var ptsB = InputArray.Create(destinationPoints);
+        using var sourcePointsInput = InputArray.Create(sourcePoints);
+        using var destinationPointsInput = InputArray.Create(destinationPoints);
         
-        return Cv2.FindHomography(ptsA, ptsB, HomographyMethods.Ransac, minimumNumberOfMatches);
+        return Cv2.FindHomography(sourcePointsInput, destinationPointsInput, HomographyMethods.Ransac, minimumNumberOfMatches);
 
     }
 
