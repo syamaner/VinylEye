@@ -36,7 +36,7 @@ The Dockerfile is built using the following command:
 
 then run as from within  "VinylEye\src\backend\VinylEye.Cli" directory:
 
-`docker run -v $PWD/images:/output:0`
+`docker run -v $PWD/images:/output syamaner/vinyleye:0`
 
 Above command will trigger the match task and output the images to  `$PWD/images` directory which is  "VinylEye\src\backend\VinylEye.Cli\images" directory.
 
