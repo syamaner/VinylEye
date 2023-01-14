@@ -36,7 +36,8 @@ The folliwing steps will demonstrate running the perspective correction command 
 
 - In a suitable location, create a directory called `images` (can be any directory you have permission to of course.)
 - Without changing the directory, issue the docker run command mounting the directory you have created below:
-  - `docker run -v $PWD/images:/output syamaner/vinyleye:1` (this is the PowerShell version)
+  - PowerShell: `docker run -v $PWD/images:/output syamaner/vinyleye:1` (this is the PowerShell version)
+  - macOs terminal: `docker run -v $(pwd)/images:/output syamaner/vinyleye:1`
 - Now if you check the images directory, you will see the original user image, the training image and the perspective corrected image output.
 
 ### Build porocess:
