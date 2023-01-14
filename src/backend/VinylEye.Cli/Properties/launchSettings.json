@@ -2,7 +2,7 @@
   "profiles": {
     "VinylEye.Cli": {
       "commandName": "Project",
-      "commandLineArgs": "perspective-correct --output-directory images"
+      "commandLineArgs": "perspective-correct --output-directory /home/user/images"
     }
   }
 }

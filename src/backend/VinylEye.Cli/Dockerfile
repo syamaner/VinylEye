@@ -1,4 +1,4 @@
-ARG OPENCV_SHARP_BUILD_TAG=2
+ARG OPENCV_SHARP_BUILD_TAG=3
 ARG SDK_VERSION=7.0-bullseye-slim-amd64
 ARG RUNTIME_VERSION=7.0-bullseye-slim
 FROM syamaner/opencvsharp-build:$OPENCV_SHARP_BUILD_TAG AS opencv
@@ -33,4 +33,4 @@ RUN ldconfig
 
 COPY --from=build /app/ /app/  
 
-ENTRYPOINT [ "dotnet", "VinylEye.Cli.dll", "match","--output-directory", "/output" ]
+ENTRYPOINT [ "dotnet", "VinylEye.Cli.dll", "perspective-correct","--output-directory", "/output" ]

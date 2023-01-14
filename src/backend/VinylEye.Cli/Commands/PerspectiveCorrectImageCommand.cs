@@ -1,6 +1,7 @@
 ﻿using System.CommandLine;
 using System.CommandLine.NamingConventionBinder;
 using OpenCvSharp;
+using VinylEye.Cli.Helpers;
 
 namespace VinylEye.Cli.Commands;
 
@@ -17,6 +18,8 @@ public class PerspectiveCorrectImageCommand : Command
 
     private int PerformPerspectiveCorrection(string outputDirectory)
     {
+        EnsureFilesExist(outputDirectory);
+        
         var queryImagePath = Path.Combine(outputDirectory, "made_in_europe_query.jpeg");
         var trainImagePath = Path.Combine(outputDirectory, "made_in_europe_train.jpg");
 
@@ -26,9 +29,9 @@ public class PerspectiveCorrectImageCommand : Command
         var (queryDescriptors, queryKeyPoints) = ImageHelper.DetectAndComputeDescriptors(queryImage);
         var (trainDescriptors, trainKeyPoints) = ImageHelper.DetectAndComputeDescriptors(trainImage);
         
-        var matches = ImageHelper.MatchFeatures(queryDescriptors, trainDescriptors, kRatioThreshold:0.5);
+        var matches = ImageHelper.MatchFeatures(queryDescriptors, trainDescriptors);
         var homographyMatrix = ImageHelper.CalculateHomographyMatrix(queryKeyPoints, trainKeyPoints, matches);
-         
+        Console.Write("return?");
         double width = trainImage.Width + queryImage.Width;
         double height = trainImage.Height + queryImage.Height;
 
@@ -43,5 +46,15 @@ public class PerspectiveCorrectImageCommand : Command
 
         Cv2.ImWrite(Path.Combine(outputDirectory, "query_perspective_corrected.jpeg"), croppedAndUnWarpedImage);
         return 1;
+    }
+    
+    private static void EnsureFilesExist(string outputDirectory)
+    {
+        FileHelper.EnsureFilesExistsInOutputDirectory(outputDirectory,
+            Path.Combine("images", "made_in_europe_query.jpeg"));
+        FileHelper.EnsureFilesExistsInOutputDirectory(outputDirectory,
+            Path.Combine("images", "made_in_europe_train.jpg"));
+        FileHelper.EnsureFilesExistsInOutputDirectory(outputDirectory,
+            Path.Combine("images", "the_real_thing.jpg"));
     }
 }

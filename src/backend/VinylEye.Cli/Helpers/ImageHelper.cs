@@ -1,7 +1,7 @@
 ﻿using OpenCvSharp;
 using OpenCvSharp.Features2D;
 
-namespace VinylEye.Cli.Commands;
+namespace VinylEye.Cli.Helpers;
 
 internal static class ImageHelper
 {
@@ -17,16 +17,16 @@ internal static class ImageHelper
     /// <param name="matches"></param>
     /// <param name="minimumNumberOfMatches"></param>
     /// <returns>Homography matrix mapping source image points to the destination image points.</returns>
-    public static Mat? CalculateHomographyMatrix(IReadOnlyList<KeyPoint> sourceKeyPoints, 
-        IReadOnlyList<KeyPoint> destinationKeyPoints, 
-        IReadOnlyCollection<DMatch> matches, 
-        int minimumNumberOfMatches=4)
+    public static Mat? CalculateHomographyMatrix(IReadOnlyList<KeyPoint> sourceKeyPoints,
+        IReadOnlyList<KeyPoint> destinationKeyPoints,
+        IReadOnlyCollection<DMatch> matches,
+        int minimumNumberOfMatches = 4)
     {
         if (matches.Count <= minimumNumberOfMatches) return null;
 
         var sourcePoints = new List<Point2f>(matches.Count);
         var destinationPoints = new List<Point2f>(matches.Count);
- 
+
         foreach (var match in matches)
         {
             var sourceKeyPoint = sourceKeyPoints[match.QueryIdx];
@@ -35,11 +35,11 @@ internal static class ImageHelper
             sourcePoints.Add(new Point2f(sourceKeyPoint.Pt.X, sourceKeyPoint.Pt.Y));
             destinationPoints.Add(new Point2f(destinationKeyPoint.Pt.X, destinationKeyPoint.Pt.Y));
         }
+
         using var sourcePointsInput = InputArray.Create(sourcePoints);
         using var destinationPointsInput = InputArray.Create(destinationPoints);
-        
-        return Cv2.FindHomography(sourcePointsInput, destinationPointsInput, HomographyMethods.Ransac, minimumNumberOfMatches);
-
+        return Cv2.FindHomography(sourcePointsInput, destinationPointsInput, HomographyMethods.Ransac,
+                minimumNumberOfMatches);
     }
 
     /// <summary>
@@ -52,7 +52,8 @@ internal static class ImageHelper
     /// <param name="kRatioThreshold"></param>
     /// <param name="minimumNumberOfMatches"></param>
     /// <returns></returns>
-    public static List<DMatch> MatchFeatures(Mat queryDescriptors, Mat trainDescriptors, double kRatioThreshold = 0.75, int minimumNumberOfMatches = 4)
+    public static List<DMatch> MatchFeatures(Mat queryDescriptors, Mat trainDescriptors, double kRatioThreshold = 0.75,
+        int minimumNumberOfMatches = 4)
     {
         using var matcher = new FlannBasedMatcher();
 
@@ -63,12 +64,11 @@ internal static class ImageHelper
                 where match[0].Distance < kRatioThreshold * match[1].Distance
                 select match[0])
             .ToList();
-        
-        return goodMatches.Count >= minimumNumberOfMatches ? goodMatches : new List<DMatch>();
 
+        return goodMatches.Count >= minimumNumberOfMatches ? goodMatches : new List<DMatch>();
     }
 
-    public static (Mat, KeyPoint[]) DetectAndComputeDescriptors(Mat queryImage, int maxFeaturesToExtract=500)
+    public static (Mat, KeyPoint[]) DetectAndComputeDescriptors(Mat queryImage, int maxFeaturesToExtract = 5000)
     {
         Mat descriptors = new();
         using var detector = SIFT.Create(nFeatures: maxFeaturesToExtract);
@@ -80,5 +80,4 @@ internal static class ImageHelper
     {
         return new Mat(path, imageReadMode);
     }
-
 }
