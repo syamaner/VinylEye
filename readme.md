@@ -28,16 +28,21 @@ To run the application using .Net CLI please use the following within "VinylEye\
 
 
 ## Running using Docker
-Alternatively the demo can be run using Docker as following:
 
-The Dockerfile is built using the following command:
+The Dockerfile is updated to use [OPENCV_VERSION=4.7.0](https://github.com/opencv/opencv/releases/tag/4.7.0), [OPENCVSHARP_VERSION=4.7.0.20230114](https://github.com/shimat/opencvsharp/releases/tag/4.7.0.20230114)
 
-`docker buildx build --push --platform linux/amd64,linux/arm64/v8,linux/arm/v7 --tag syamaner/vinyleye:0 .`
 
-then run as from within  "VinylEye\src\backend\VinylEye.Cli" directory:
+The folliwing steps will demonstrate running the perspective correction command without cloning the repository:
 
-`docker run -v $PWD/images:/output syamaner/vinyleye:0`
+- In a suitable location, create a directory called `images` (can be any directory you have permission to of course.)
+- Without changing the directory, issue the docker run command mounting the directory you have created below:
+  - `docker run -v $PWD/images:/output syamaner/vinyleye:1` (this is the PowerShell version)
+- Now if you check the images directory, you will see the original user image, the training image and the perspective corrected image output.
 
-Above command will trigger the match task and output the images to  `$PWD/images` directory which is  "VinylEye\src\backend\VinylEye.Cli\images" directory.
+### Build porocess:
 
- 
+The Dockerfile is built and pusched https://hub.docker.com/repository/docker/syamaner/vinyleye/tags using the following command:
+
+`docker buildx build --push --platform linux/amd64,linux/arm64/v8,linux/arm/v7 --tag syamaner/vinyleye:1 .`
+
+

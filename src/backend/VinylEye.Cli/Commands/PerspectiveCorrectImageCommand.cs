@@ -31,7 +31,7 @@ public class PerspectiveCorrectImageCommand : Command
         
         var matches = ImageHelper.MatchFeatures(queryDescriptors, trainDescriptors);
         var homographyMatrix = ImageHelper.CalculateHomographyMatrix(queryKeyPoints, trainKeyPoints, matches);
-        Console.Write("return?");
+
         double width = trainImage.Width + queryImage.Width;
         double height = trainImage.Height + queryImage.Height;
 
