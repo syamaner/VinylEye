@@ -2,6 +2,8 @@
 using System.CommandLine.NamingConventionBinder;
 using OpenCvSharp;
 using VinylEye.Cli.Helpers;
+using VinylEye.Core.Helpers;
+
 // ReSharper disable UnusedMethodReturnValue.Local
 // ReSharper disable once UnusedMember.Global
 
@@ -22,7 +24,7 @@ public class MatchImageCommand : Command
         });
     }
 
-    private int MatchImages(string outputDirectory, bool useCorrectMatches)
+    private static int MatchImages(string outputDirectory, bool useCorrectMatches)
     {
         EnsureFilesExist(outputDirectory);
         
@@ -56,11 +58,11 @@ public class MatchImageCommand : Command
 
     private static void EnsureFilesExist(string outputDirectory)
     {
-        FileHelper.EnsureFilesExistsInOutputDirectory(outputDirectory,
+        PathExtensions.EnsureFilesExistsInOutputDirectory(outputDirectory,
             Path.Combine("images", "made_in_europe_query.jpeg"));
-        FileHelper.EnsureFilesExistsInOutputDirectory(outputDirectory,
+        PathExtensions.EnsureFilesExistsInOutputDirectory(outputDirectory,
             Path.Combine("images", "made_in_europe_train.jpg"));
-        FileHelper.EnsureFilesExistsInOutputDirectory(outputDirectory,
+        PathExtensions.EnsureFilesExistsInOutputDirectory(outputDirectory,
             Path.Combine("images", "the_real_thing.jpg"));
     }
 }

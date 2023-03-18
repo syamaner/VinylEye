@@ -5,6 +5,10 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinylEye.Cli", "VinylEye.Cli\VinylEye.Cli.csproj", "{50DD3A00-1F1F-43A3-9942-21DA50D24ABE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylEye.Core", "VinylEye.Core\VinylEye.Core.csproj", "{2FD85CAF-7249-4038-9843-3D94ED0D7DD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylEye.Benchmark", "VinylEye.Benchmark\VinylEye.Benchmark.csproj", "{6F7872D3-8A78-4BFA-8C85-DC08D6373708}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{50DD3A00-1F1F-43A3-9942-21DA50D24ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50DD3A00-1F1F-43A3-9942-21DA50D24ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50DD3A00-1F1F-43A3-9942-21DA50D24ABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FD85CAF-7249-4038-9843-3D94ED0D7DD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FD85CAF-7249-4038-9843-3D94ED0D7DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FD85CAF-7249-4038-9843-3D94ED0D7DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FD85CAF-7249-4038-9843-3D94ED0D7DD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F7872D3-8A78-4BFA-8C85-DC08D6373708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7872D3-8A78-4BFA-8C85-DC08D6373708}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7872D3-8A78-4BFA-8C85-DC08D6373708}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7872D3-8A78-4BFA-8C85-DC08D6373708}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

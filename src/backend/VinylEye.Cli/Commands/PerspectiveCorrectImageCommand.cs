@@ -2,6 +2,7 @@
 using System.CommandLine.NamingConventionBinder;
 using OpenCvSharp;
 using VinylEye.Cli.Helpers;
+using VinylEye.Core.Helpers;
 
 namespace VinylEye.Cli.Commands;
 
@@ -16,7 +17,7 @@ public class PerspectiveCorrectImageCommand : Command
         Handler = CommandHandler.Create((string outputDirectory) => PerformPerspectiveCorrection(outputDirectory));
     }
 
-    private int PerformPerspectiveCorrection(string outputDirectory)
+    private static int PerformPerspectiveCorrection(string outputDirectory)
     {
         EnsureFilesExist(outputDirectory);
         

@@ -348,3 +348,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+data/cover-art/**/*
+
+data/test/**/*
+data/index_sift_512_256.bin
+data/index_sift_800_400.bin
